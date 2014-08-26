@@ -7,9 +7,9 @@ import java.util.Date;
  */
 public class Sample {
     private Date date;
-    private Integer data;
+    private String data;
 
-    public Sample(Integer data) {
+    public Sample(String data) {
         this.date = new Date();
         this.data = data;
     }
@@ -22,11 +22,11 @@ public class Sample {
         this.date = date;
     }
 
-    public Integer getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Integer data) {
+    public void setData(String data) {
         this.data = data;
     }
 

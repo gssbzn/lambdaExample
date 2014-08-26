@@ -5,7 +5,7 @@ package com.borabora;
  */
 public class SampleConsumer implements java.util.function.Consumer<Sample> {
 
-    private static final long PAUSE = 81;
+    private static final long PAUSE = 500;
 
     @Override
     public void accept(Sample sample) {
