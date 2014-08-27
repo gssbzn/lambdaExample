@@ -3,6 +3,11 @@ package com.example.lambdaExample;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+/**
+ * 
+ * @author Gustavo Bazan
+ *
+ */
 public class Venta implements Serializable{
 	/**	 */
 	private static final long serialVersionUID = 2220303649185573984L;

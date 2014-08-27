@@ -1,11 +1,14 @@
 package com.example.lambdaExample;
 
 import java.math.BigDecimal;
+import java.util.OptionalDouble;
+import java.util.Random;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * Hello world!
+ * 
+ * @author Gustavo Bazan
  *
  */
 public class App 
@@ -19,7 +22,7 @@ public class App
 		Thread t = new Thread(new simularVentas());
 		t.start();
     	do{
-			total = ventas.stream().map((x) -> x.getMonto()).reduce((x,y) -> x.add(y)).get();
+			total = ventas.stream().parallel().map((x) -> x.getMonto()).reduce((x,y) -> x.add(y)).get();
 	    	System.out.print("\rtotal="+total);
 	    	Thread.sleep(2500);
     	}while(true);
@@ -48,7 +51,14 @@ public class App
     	
     	@Override
         public void run() {
-        	Venta venta = new Venta(transaccion.getAndIncrement(), BigDecimal.ONE);
+    		Random a = new Random();
+    		OptionalDouble amt = a.doubles(1, 500).findAny();
+    		BigDecimal ventaAmt;
+    		if(amt.isPresent())
+    			ventaAmt = new BigDecimal(amt.getAsDouble());
+    		else
+    			ventaAmt = BigDecimal.ZERO;
+        	Venta venta = new Venta(transaccion.getAndIncrement(), ventaAmt.setScale(2, BigDecimal.ROUND_HALF_UP));
         	ventas.add(venta);
         }
     }
