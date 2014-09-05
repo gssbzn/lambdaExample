@@ -1,7 +1,5 @@
 package com.borabora;
 
-import java.util.concurrent.ArrayBlockingQueue;
-
 /**
  * Created by epauser on 13/08/14.
  */
@@ -12,21 +10,21 @@ public class SampleSupplier implements java.util.function.Supplier<Sample> {
     String id;
 
     public SampleSupplier(String id) {
-    	this.id = id;
-       new Thread() {
-           @Override
-           public void run() {
-               int i = 0;
-               while (true) {
-                   buffer = new Sample("Sample " + (++i) + " from " + id);
-                   try {
-                       Thread.sleep(PAUSE);
-                   } catch (InterruptedException e) {
-                       e.printStackTrace();
-                   }
-               }
-           }
-       }.start();
+        this.id = id;
+        new Thread(this.id) {
+            @Override
+            public void run() {
+                int i = 0;
+                while (true) {
+                    buffer = new Sample("Sample " + (++i) + " from " + id);
+                    try {
+                        Thread.sleep(PAUSE);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }.start();
     }
 
     @Override
