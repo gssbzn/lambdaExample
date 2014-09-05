@@ -6,6 +6,11 @@ package com.borabora;
 public class SampleConsumer implements java.util.function.Consumer<Sample> {
 
     private static final long PAUSE = 500;
+    private String id;
+
+    public SampleConsumer(String id) {
+        this.id = id;
+    }
 
     @Override
     public void accept(Sample sample) {
@@ -15,7 +20,7 @@ public class SampleConsumer implements java.util.function.Consumer<Sample> {
             e.printStackTrace();
         }
         if (sample != null) {
-            System.out.println("\t\tConsuming sample " + sample);
+            System.out.println(id + " consuming " + sample);
         } else {
             System.out.println("No samples");
         }
