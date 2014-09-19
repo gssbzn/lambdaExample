@@ -17,6 +17,7 @@ public class Main {
 		DataMiner data = new DataMiner("properties/dataminer.properties");
 		try {
 			data.initData();
+			data.getProcessedData(1);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -42,14 +42,14 @@ public class DataMiner {
 	public void initData() throws Exception{
 		InputStream inputStream = getClass().getClassLoader().getResourceAsStream(file);
 		int qty;
-        properties.load(inputStream);
-        
-        this.prefix = properties.getProperty("Prefix");
+        properties.load(inputStream);        
+        this.prefix = properties.getProperty("PrefixName");
         qty = Integer.valueOf(properties.getProperty("ObservationsNo"));
         this.filenames = new String[qty];
         this.observations = new Observation[qty];
         for(int i = 0; i < qty; i++){
         	this.filenames[i] = prefix + (i + 1);
+        	this.observations[i] = new Observation(this.prefix + (i + 1));
         }
 	}
 
@@ -68,10 +68,10 @@ public class DataMiner {
 		if(!this.initialized)
 			initData();
 		
-		if(!observations[observationNo].isProcessed())
-			observations[observationNo].process();
+		if(!observations[observationNo - 1].isProcessed())
+			observations[observationNo - 1].processData();
 		
-		return observations[observationNo];
+		return observations[observationNo - 1];
 	}
 	
 	/**
